@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>GPU circuit board and firmware chip</title>
+  <rect x="4" y="4" width="120" height="120" rx="24" fill="#18232d"/>
+  <rect x="27" y="35" width="81" height="55" rx="7" fill="none" stroke="#f47b35" stroke-width="5"/>
+  <path d="M19 28 H27 V98 H19" fill="none" stroke="#f47b35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M41 91 V99 M51 91 V99 M61 91 V99 M71 91 V99" fill="none" stroke="#f47b35" stroke-width="5"/>
+  <path d="M57 44 V51 M67 44 V51 M57 74 V81 M67 74 V81 M44 57 H51 M44 67 H51 M74 57 H81 M74 67 H81" fill="none" stroke="#eef4f7" stroke-width="4"/>
+  <rect x="51" y="51" width="23" height="23" rx="3" fill="#eef4f7"/>
+  <rect x="58" y="58" width="9" height="9" rx="1" fill="#18232d"/>
+  <path d="M90 48 H98 M90 58 H98 M90 68 H98 M90 78 H98" fill="none" stroke="#f47b35" stroke-width="3"/>
+</svg>

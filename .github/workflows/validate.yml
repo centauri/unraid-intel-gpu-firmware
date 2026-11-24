@@ -1,0 +1,32 @@
+name: Validate public alpha
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install test dependencies
+        run: sudo apt-get update && sudo apt-get install -y php-cli php-xml
+      - name: Test simulated hardware and real local guard processes
+        run: php tests/run.php
+      - name: Build and validate public package
+        run: |
+          python3 tools/build.py
+          python3 tests/package_check.py
+      - name: Validate developer candidate without installing or flashing
+        run: |
+          python3 tools/build.py --candidate
+          python3 tests/candidate_check.py
+      - name: Prepare explicit public artifacts only
+        run: python3 tools/prepare_release.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: intel-gpu-firmware-public-alpha
+          path: release/*
+          if-no-files-found: error

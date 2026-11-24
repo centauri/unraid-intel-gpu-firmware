@@ -1,0 +1,434 @@
+{
+  "schema": 1,
+  "verified_on": "2026-11-24",
+  "package": {
+    "version": "32.0.101.9175",
+    "url": "https://downloadmirror.intel.com/932449/gfx_win_101.9175.exe",
+    "sha512": "c1c7a858a5c977df59a3b6352a925100fbf97199b235eb5c3e45a5d037850b363bbc7605206a85bc5dcaeac0c751a06875f91b9bc13b31e59115d784c9c14111",
+    "hash_verified": true,
+    "size": 904495280,
+    "source_page": "https://www.intel.com/content/www/us/en/download/785597/intel-arc-graphics-windows.html"
+  },
+  "images": [
+    {
+      "path": "Graphics/ifwi/acm/fwcode/dg2_gfx_fwupdate_SOC1.bin",
+      "component": "gsc",
+      "size": 2101248,
+      "sha256": "c32374f58b338370f42c6edf019ac7438bcc968884d10fab95e1263d01cf8544"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwcode/dg2_gfx_fwupdate_SOC2.bin",
+      "component": "gsc",
+      "size": 2101248,
+      "sha256": "7a6c2bdb6182e6035e9dbabf5498158dc13ff46f954931cad082c18498f9567e"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwcode/dg2_gfx_fwupdate_SOC3.bin",
+      "component": "gsc",
+      "size": 2101248,
+      "sha256": "ed97e2d114adb673cc9efea51b97755351f151ce77e3a55c58fc89f5f28a0091"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_acer_predator-a380_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "22cfabdc38ccc11a52ea2ba4dbef840e56a2ab1f7dd49b6003e543a8c1c43dec"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_acer_predator-bifrost-a770_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "7a6b6be6a42ed6022440c6f45f05b9fdf5b341962dd714c836ed2b98c1951d6a"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_asrock_challenger-a310_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "c8c60c27d17811e8900691fecdfa2374d44d3a8faa00eddec7940e04b038e697"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_asrock_challenger-a380_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "3490c1875f7d6f3dcc7654683b07865eb88fc323483fe45cd42e73934d6f7a81"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_asrock_challenger-a580_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "ce8a1193e7a42ee0fc5a55761899e36a38c9e7678e854021095b32aef7a410bf"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_asrock_challenger-a750_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "638b64ce439ec7d107f18dc2afd65059e72c5d43c32d615b69a6ecd15003ce52"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_asrock_phantom-gaming-a770_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "0eeeb878c6223b6240422790dc1c9a8ba56546b6a0e25874746cdd793a3097ab"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_asus_dual-a380_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "15f6e97019b052061ccebd9a874ab0d1a14b5b06dcd11e74d16da97b8abca405"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_dell_widowmaker-a770_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "0b9950efdc1f2c2724d3ec412d5d0382734c2d409d279f0e808d8fcf147d9637"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_gunnir_flux-a750_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "0748c2174df00f08cb2eb8bb0af334a343bfe1feb5ffd8f68a2e7d42806999c7"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_gunnir_flux-a770_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "c53a2cd6e1ce2356408141eaba087b22343c6292df2b67be9904f3848ca85c0e"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_gunnir_gu23a-a580_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "8faed4607cc2812ace7641852f6d944bc332bdc81ca7dd59b961dc4124f4aaa0"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_gunnir_index-a380_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "1ed1f6ac4dff10caae90b1fdf206eddafa77a66ff85f4324bb5158646106a60d"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_gunnir_photon-a380_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "7e0f5e5d011db7c9100b7e979c7162e495462869e7ccfd93add7207e76e848a4"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_gunnir_photon-a750_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "b320313878775779117d752a03745ed0443ea63c89257e9c36e49dddf20b926f"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_gunnir_photon-a770_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "675cd4c0f55e7a04437668bb89ae8f89deeb37c71d93d87a2bbca8cf5fd2c1ae"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_intel_a750-cr2_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "f1370431f18d07bf140e3e2ac8f1d264ee96b3f0f6a90d941674a68749cd936a"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_intel_a750-gold_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "4222c36a94cd199c545487257a0866c84f396898d7e71e78cdaf7d66cd535cdc"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_intel_a750_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "038d8c5b1c98939d21b56b699d46731ef86ce18e687d33ef39296d49fe994045"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_intel_a770_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "2e57efd913cf94e63f1668a22d7472a7a8d4b9d7527940c828d51da15b9fdfe8"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_6gb-genie-a380_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "482f10f614d2552568fcefb5cf110c566feb27ccdd477cc8d55ba6d86c846e57"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_6gb-industrial-lp-a380_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "dded901882fd694ed03ae0d25fcfc78070c017c5fce3a8e517360e3d8650d1e1"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_6gb-ipc-omni-a380_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "1b73151bbf5438345b08b4f33195b231ce99ce986aa9358dd25a704822b2f0dd"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_elf-a310_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "2926ebd3a0268acb835f3a2c4b2c680feab71d6e0c664152da4ff9a3a0e9b131"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_lp-eco-a310_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "b6aaebf62fa8561b5f34949e780f9ce5449757fbb2b724bd5f00a6b1ccae5689"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_lp-ipc-a310_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "e6135dd64155376b528753ac98948b2ccbf106098deb933061b597c215a132d2"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_lp-ipc-omni-a310_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "4efc267920fded2f5e416131e7c764bccf2e3e99ff41489872b210f8a2898aa1"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_lp-ipc-pfu-a310_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "5eff687eb3ef230a39707becb299697294f2e14d90250133dc7d2c5d0d1403bb"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_lp-s-eco-a310_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "036df8649fbbe0292bc49db513f67c3c5328369682e21a221bbe9fc35f5dd7cd"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_orc-a580_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "b0376cdac05e4858424e83c4e67feb406a4f71189e7a8ee37e3ba894639b0c59"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_orc-a750_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "35fb26cdc475cdb1eb67a0b23fa36904ce88fbecd99d9d2634003a33f5b0dd05"
+    },
+    {
+      "path": "Graphics/ifwi/acm/fwdata/dg2_sparkle_titan-a750_config-data.bin",
+      "component": "fw-data",
+      "size": 40960,
+      "sha256": "33a266e5d2911fd715461d4bc5e8efedca3c17a2a60c095a0387966c12a5d5ad"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromcode/dg2_c_oprom.rom",
+      "component": "oprom-code",
+      "size": 1048576,
+      "sha256": "bc7743ec55e2cb28c7137733bf859814175b8a941430b5093d1f91a41fe064e8"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_acer_predator-a380_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "dad6a5d7c687ed6ee5394b680626ff61ba5d05f95668f1269a984323338a205f"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_acer_predator-bifrost-a770_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "8d5909a49712e59f7ae8756bc9139503843bc76a8fdb19f8771ede7985a9c089"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_asrock_challenger-a380_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "0e5ef08b6272fbe107a071354a42201467e7243c72ed392d064f8f87e67adc8d"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_asrock_challenger-a750_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "58552d7de02d5b6ac26cf73e4b972557f7b085f6d6b44e695dc4d90447769d32"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_asrock_phantom-gaming-a770_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "6fafa36d9bb604b4f2ce91449957cd58f8711eae44f01a6f6514b12f3d82c8b1"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_asus_dual-a380_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "f894203d21284d19a85e3ca8d2755ddbd064e6f63a6ff76f99878e429f2d8e1f"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_gunnir_flux-a770_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "c8158752852bfd038785af2bd164870a2680840af28ad85ee3c34152d3128b7d"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_gunnir_photon-a380_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "eef981cea271715a5995ed062c140c6a1d7c9912abef03def43ec5d383a12e07"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_intel_a750-cr2_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "345d9888cafa385e0f5b1dd750d510b470209c1073d1ca6fe50cfedf808a9031"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_intel_a750-gold_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "0b53a54af8f6652e914a95198a410b972189ab584f5432b7b993babd15301563"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_intel_a750_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "3362c79cc244634fa1212a1660a948e7146ef0787cabdea76c372ca08888bb71"
+    },
+    {
+      "path": "Graphics/ifwi/acm/opromdata/dg2_d_intel_a770_oprom-data.rom",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "e15e07dc6dabbeec3e13e26cb3be6f7085b55a20f2a5a81bf0e9f9ec667376d3"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwcode/bmg_g21_fwupdate.bin",
+      "component": "gsc",
+      "size": 2101248,
+      "sha256": "28c1b0b06fa46fa2a45ee694e347171f15c72ef40708dbf5a2129d90b5ca456b"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwcode/bmg_g31_fwupdate.bin",
+      "component": "gsc",
+      "size": 2101248,
+      "sha256": "336fe6d864e3ad8f6ff1ca825e445e3bfd49e80ee33e5f2281af3fd661d9a0b6"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_asrock_b65create32gb-b65_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "88ee423bcb1ce3c02e22ac925256569e444e265addf79c6d8ef1b8ce67985504"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_asrock_creator-b60_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "443a4c98acd1588f6c92c9f778bcfecb8217811bf5fb6ec7c3bd8119af954a9f"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_asrock_creator-b70_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "08b88bf35b6815a89e4ecf53f43b164c5365ff9a32bc4daa8809bcfaabb38dbc"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_asrock_passive-b60_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "1e2e0a434f334a4f3bdd20f5c1cb56473db8ba2e4c2e6b1a6dc298dc47c90c9a"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_ibc-c91_e223_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "3e99afc772d1ec9994f72e9e168b86e9ae43453569f3fdb254042dbd9f18ed9b"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_ibc-dws-b93_e212_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "f6fb8920532514f4dd469f8454ba117ef251960d5a8f64cd650eba66136de185"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_ibc-frd-b36_e20b_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "eb9d278a7459f7589e22874c98c02d7584362572f1c596d8cbd6a09ae3615437"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_onix_arkn_intel_arc_pro_b60-b60_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "955b59622b80328973518d21be0dd62647be54bc621511d45affe28444efa2f2"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_shangke_b60_1gpu-b60_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "a6ccda9ed4766b775c566fae8c573446d502d951985dffeef6292f5989efa504"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_shangke_b60dual_gpu1-b60_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "b342f9b95f808832e54e42eb66211cc487ac4a93b8e1349fbe94277e6faa908d"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_shangke_b60dual_gpu2-b60_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "46b5e60a35879b086cb88a1d16dc204475ac40c8974c0fee3a35deca8352dad6"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_sparkle_b60__passive-b60_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "6f133c674a8dc82e4023cde98ea4f5250ccac183b383ffe0f8d60bb8783a6c39"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_sparkle_b60_blower-b60_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "0001ec52452bb1c01de71da8937aaa6aa788b96a3df8c323a51256c8c336c575"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_sparkle_dual_b60_passive-b60_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "1943f34d495fd8653b0b04b64fb55b1eda978cc497f6c9f09d5c43e4d5077cc4"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_sparkle_ib50gx2_su2b-b60_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "ad82543b1cc7915298b72f7e7b27acbe73e36ee7af2be6c0fa2db2114f30d4b8"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/fwdata/bmg_sparkle_passive-b70_config-data.bin",
+      "component": "fw-data",
+      "size": 258048,
+      "sha256": "6c78704f4d406730bdb3d0723a46f36963456afde08b08a0275aa24c464fcbc1"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/opromcode/bmg_OpromCode.bin",
+      "component": "oprom-code",
+      "size": 983040,
+      "sha256": "130cfb0d50a871b30e64c124305d47efe258dbaea941729aca30ee1178f8a177"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/opromdata/bmg_e20b_1100_config19.bin",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "4103d75a8d75f7002aa0611a1d7be6293a0d3d7184d6d0c9671b9ae118c091d5"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/opromdata/bmg_e212_1114_config23.bin",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "c9ff6a6a2e9a489e13f8009dc7073e3c73a448c73a7c076fd0a7f13ebac8bd67"
+    },
+    {
+      "path": "Graphics/ifwi/bmg/opromdata/bmg_e223_1701_config20.bin",
+      "component": "oprom-data",
+      "size": 65536,
+      "sha256": "6cd51e8782388393cd19c87a148c3a30740a805ba8b04ac8effb804714c350c2"
+    }
+  ]
+}

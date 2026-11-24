@@ -1,0 +1,64 @@
+<div class="igf-heading">
+  <div class="igf-brand"><img class="igf-logo" src="/plugins/intel.gpu.firmware/intel-gpu-firmware.svg" width="64" height="64" alt=""><div><p class="igf-kicker">HARDWARE / FIRMWARE</p><h1>Intel GPU Firmware</h1>
+    <p class="igf-lead">Inspect your GPUs. Verify the package. Rehearse the checks.</p></div></div>
+  <span class="igf-release" id="igf-release">PUBLIC ALPHA · WRITES DISABLED</span>
+</div>
+<p class="igf-mode" id="igf-mode"><strong>Public alpha — physical firmware writes are disabled.</strong> Scan, download, compatibility checks and dry tests are available. There is no setting to enable flashing. Optional maintenance rehearsals require approval to stop the listed workloads.</p>
+<div class="igf-toolbar">
+  <button type="button" id="igf-scan" class="igf-primary">Scan Intel GPUs</button>
+  <button type="button" id="igf-stage">Download verified firmware</button>
+  <a href="/plugins/intel.gpu.firmware/api.php?action=report" id="igf-report" download>Export support report</a>
+</div>
+<div id="igf-status" role="status" aria-live="polite"></div>
+<div class="igf-overview">
+  <div><span>DETECTION</span><strong>Any Intel board vendor</strong><p>Support follows the detected Intel interface, not the logo on the card.</p></div>
+  <div><span>UPDATE SCOPE</span><strong>GSC firmware</strong><p>OPROM, board settings and HDMI firmware are kept separate.</p></div>
+  <div><span>CONTROL</span><strong id="igf-control">Read-only testing</strong><p id="igf-control-detail">Physical writes are blocked in this build, including direct API requests.</p></div>
+</div>
+<section aria-labelledby="igf-devices-title">
+  <div class="igf-section-title"><h2 id="igf-devices-title">Your Intel GPUs</h2><span id="igf-scan-time">Not scanned yet</span></div>
+  <div id="igf-cards"><div class="igf-empty"><strong>Start with a scan</strong><p>Discover Intel display controllers and the firmware features each one exposes. Scanning does not update the GPU.</p></div></div>
+</section>
+<section id="igf-workloads-panel" hidden aria-labelledby="igf-workloads-title">
+  <div class="igf-section-title"><h2 id="igf-workloads-title">GPU maintenance</h2><span>Selected GPU only</span></div>
+  <div id="igf-workloads-body"></div>
+</section>
+<section id="igf-check-panel" hidden aria-labelledby="igf-check-title">
+  <div class="igf-section-title"><h2 id="igf-check-title">Compatibility check</h2><span>NO WRITES</span></div>
+  <div id="igf-check-body"></div>
+</section>
+<section id="igf-flash-panel" hidden aria-labelledby="igf-flash-title">
+  <h2 id="igf-flash-title">Update status</h2><div id="igf-flash-body" role="status" aria-live="polite"></div>
+  <button type="button" id="igf-verify" hidden>Verify after reboot</button>
+</section>
+<section id="igf-dry-panel" hidden aria-labelledby="igf-dry-title"><h2 id="igf-dry-title">Dry-test result</h2><div id="igf-dry-body"></div></section>
+<section id="igf-releases-panel" aria-labelledby="igf-releases-title">
+  <div class="igf-section-title"><h2 id="igf-releases-title">Intel releases</h2><button type="button" id="igf-releases">Check Intel releases</button></div>
+  <div id="igf-releases-body"></div>
+  <p class="igf-footnote">Checks Intel's Arc Windows package page when you click. A newer driver package does not prove newer GSC firmware is available for your GPU. Unknown packages require a reviewed catalog update before flashing. No automatic download or flash.</p>
+</section>
+<section id="igf-history-panel" aria-labelledby="igf-history-title">
+  <div class="igf-section-title"><h2 id="igf-history-title">Firmware history</h2><span>Saved across reboots</span></div>
+  <p id="igf-history-warning" role="status"></p>
+  <div id="igf-history-body"></div>
+  <p class="igf-footnote">Keeps the latest 100 events per PCI address and hardware identity. Moving a GPU creates a separate history; replacing it with an identical card in the same slot cannot be distinguished. Historical readings and compatibility checks are not live status.</p>
+</section>
+<details class="igf-details">
+  <summary>What does supported mean?</summary>
+  <p><strong>Detected</strong> means the Intel PCI device is visible. <strong>Inspectable</strong> means Intel's firmware interface responds. <strong>Compatible image</strong> means one newer GSC image passes the project, version and hardware checks.</p>
+  <p>These checks do not certify every board or generation. Integrated GPUs and devices without a firmware interface remain visible with an explanation. New generations need matching vendor firmware and support in the underlying Intel tool.</p>
+  <p>Preview releases do not promise recovery from a failed flash. A backup of the Unraid USB drive is not a GPU firmware backup.</p>
+</details>
+<p class="igf-footnote">Only the reviewed firmware catalog can supply flash images. Online release checks do not change that catalog.</p>
+<dialog id="igf-confirm">
+  <form id="igf-confirm-form">
+    <p class="igf-kicker">CONFIRM GSC UPDATE</p><h2>One GPU. One update.</h2>
+    <div id="igf-confirm-summary"></div>
+    <p>The GPU must remain powered until the update finishes. Recovery or downgrade is not guaranteed. Other firmware components are not updated.</p>
+    <label class="igf-check-label"><input type="checkbox" id="igf-ack"> I understand that an interrupted or failed update can leave the GPU unusable and recovery is not guaranteed. I will not shut down or remove power during the update. A UPS is recommended, not required.</label>
+    <label for="igf-phrase">Type <strong id="igf-expected"></strong> to confirm</label>
+    <input id="igf-phrase" autocomplete="off" spellcheck="false" required>
+    <p id="igf-confirm-error" role="alert"></p>
+    <div class="igf-dialog-actions"><button type="button" id="igf-cancel">Cancel</button><button type="submit" id="igf-write" class="igf-danger" disabled>Start firmware update</button></div>
+  </form>
+</dialog>

@@ -1,0 +1,24 @@
+name: Alpha compatibility report
+description: Report detection and dry-test results without flashing hardware.
+body:
+  - type: markdown
+    attributes:
+      value: Do not flash a GPU to submit a report. Review exported JSON for privacy. Do not post raw diagnostics, credentials or server logs.
+  - type: input
+    id: hardware
+    attributes:
+      label: Exact board model and Unraid version
+    validations:
+      required: true
+  - type: textarea
+    id: observations
+    attributes:
+      label: Observed result and steps
+      description: Separate detection, Intel interface access and compatible image checks. If maintenance was rehearsed, describe restoration separately.
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Reviewed support report
+      render: json
