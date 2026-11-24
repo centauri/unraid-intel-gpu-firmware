@@ -40,7 +40,11 @@ with tarfile.open(fileobj=buf, mode="w", format=tarfile.PAX_FORMAT) as tar:
                     data = text.encode()
                 info.size = len(data)
                 tar.addfile(info, io.BytesIO(data))
-payload = gzip.compress(buf.getvalue(), mtime=0)
+payload = bytearray(gzip.compress(buf.getvalue(), mtime=0))
+# Python 3.11/3.12 delegate mtime=0 to zlib, which emits a platform OS byte.
+# Normalize that informational header so Linux CI and macOS produce identical PLGs.
+payload[9] = 255
+payload = bytes(payload)
 sha = hashlib.sha256(payload).hexdigest()
 plugin = ET.Element("PLUGIN", name="intel.gpu.firmware", author="Intel GPU Firmware contributors",
                     version=version, launch="Tools/IntelGpuFirmware", icon="/plugins/intel.gpu.firmware/intel-gpu-firmware.png", min="7.4.1")

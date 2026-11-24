@@ -20,6 +20,7 @@ assert xml.attrib['pluginURL'] == json.loads((root/'release.json').read_text())[
 embedded = [f for f in xml.findall("FILE") if f.attrib.get("Type") == "base64"]
 assert len(embedded) == 1
 data = base64.b64decode(embedded[0].findtext("INLINE"), validate=True)
+assert data[9] == 255, 'Gzip header must be platform independent'
 sha = hashlib.sha256(data).hexdigest()
 assert embedded[0].attrib["Name"].endswith("/payload-" + sha + ".tar.gz")
 scripts = [f.findtext("INLINE") for f in xml.findall("FILE") if "Run" in f.attrib]
