@@ -19,7 +19,7 @@ if(str_starts_with($path,'/preview-api/')) {
     }
     if(($_GET['action']??'')==='report') {echo json_encode(['preview'=>true,'vendor'=>'8086','device'=>'56a5']);exit;}
     $ready=str_ends_with($path,'/ready');
-    $alpha=str_ends_with($path,'/alpha');
+    $readonly=str_ends_with($path,'/readonly');
     $card=['name'=>'Intel Arc A380 · example','board_vendor'=>'ASRock','bdf'=>'0000:03:00.0','vendor'=>'8086','device'=>'56a5','subvendor'=>'1849','subdevice'=>'6004',
         'capability'=>'inspect','firmware'=>['text'=>'DG02_2.2353'],'driver'=>'i915','reason'=>'Intel firmware interface available. Package compatibility still needs to be checked.',
         'components'=>['fw-data'=>"Format: 1\nMajor Version: 101",'oprom-code'=>'14 00 2C 04 00 00 00 00','oprom-data'=>'14 00 28 04 00 00 00 00']];
@@ -39,7 +39,7 @@ if(str_starts_with($path,'/preview-api/')) {
             ['id'=>'two','kind'=>'observed','at'=>'2026-11-24T14:00:00Z','versions'=>['gsc'=>$card['firmware']['text']]],
             ['id'=>'three','kind'=>'available','at'=>'2026-11-24T14:01:00Z','from'=>'DG02_2.2353','to'=>'DG02_2.2359','package'=>$package['version']]
         ]]]];
-    echo json_encode(['catalog'=>$package,'intel_release'=>$release,'history'=>$history,'version'=>'2026.11.24h-alpha1','writes_enabled'=>!$alpha,'mode'=>$alpha?'read_only_test':'experimental_write','inventory'=>['scanned_at'=>'2026-11-24T14:00:00Z','cards'=>[$card,$integrated]],'staged'=>['checked_at'=>'2026-11-24T14:00:00Z'],
+    echo json_encode(['catalog'=>$package,'intel_release'=>$release,'history'=>$history,'version'=>'2026.11.24i-alpha2','writes_enabled'=>!$readonly,'mode'=>$readonly?'read_only_test':'experimental_write','inventory'=>['scanned_at'=>'2026-11-24T14:00:00Z','cards'=>[$card,$integrated]],'staged'=>['checked_at'=>'2026-11-24T14:00:00Z'],
         'workloads'=>['id'=>str_repeat('a',32),'bdf'=>$card['bdf'],'checked_at'=>'2026-11-24T14:00:00Z','expires_at'=>time()+600,'blockers'=>[],'items'=>[['kind'=>'docker','name'=>'Plex','running'=>true,'reasons'=>['Device: /dev/dri/renderD128']],['kind'=>'docker','name'=>'Example runner','running'=>true,'reasons'=>['Privileged: access to all host devices']]]],
         'job'=>['state'=>'complete'],'flash'=>[],
         'check'=>['checked_at'=>'2026-11-24T14:00:00Z','bdf'=>$card['bdf'],'eligible'=>true,
@@ -50,11 +50,11 @@ if(str_starts_with($path,'/preview-api/')) {
                 'power'=>['ok'=>false,'required'=>false,'reason'=>'No suitable UPS status is available.'],
                 'warnings'=>['No suitable UPS status is available. A UPS is recommended, not required. Keep power stable throughout the update.']]]]);exit;
 }
-$dark=$path==='/dark';$ready=$path==='/ready';$mode=match($path){'/alpha'=>'alpha','/new'=>'new','/offline'=>'offline','/ready'=>'ready',default=>'blocked'};
+$dark=$path==='/dark';$ready=$path==='/ready';$mode=match($path){'/alpha'=>'alpha','/readonly'=>'readonly','/new'=>'new','/offline'=>'offline','/ready'=>'ready',default=>'blocked'};
 ?><!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Intel GPU Firmware · local preview</title>
 <style>body{margin:0;font:15px -apple-system,BlinkMacSystemFont,Arial,sans-serif;background:<?=$dark?'#1d2024':'#fafaf9'?>;color:<?=$dark?'#e8e7e5':'#252621'?>;color-scheme:<?=$dark?'dark':'light'?>}.preview-bar{padding:10px 24px;background:#282d32;color:#fff;font-size:12px;letter-spacing:.3px}.preview-bar a{color:#ffb97b;margin-left:16px}iframe{display:block;width:390px;height:1800px;border:1px solid #777;margin:20px auto;max-width:100%}</style>
-<div class="preview-bar">LOCAL FIXTURE · NO HARDWARE ACCESS <a href="/alpha">Public alpha</a><a href="/">Blocked</a><a href="/ready">Ready</a><a href="/dark">Dark</a><a href="/mobile">Mobile 390px</a></div>
+<div class="preview-bar">LOCAL FIXTURE · NO HARDWARE ACCESS <a href="/alpha">Public alpha</a><a href="/">Blocked</a><a href="/ready">Ready</a><a href="/readonly">Read-only</a><a href="/dark">Dark</a><a href="/mobile">Mobile 390px</a></div>
 <?php if($path==='/mobile'): ?><iframe src="/" title="Mobile preview"></iframe><?php else: ?>
 <link rel="stylesheet" href="/style.css"><div id="igf" data-api="/preview-api/<?=$mode?>" data-csrf="local-preview-csrf-not-a-secret">
 <?php include $root.'/web/view.html'; ?></div><script src="/app.js"></script>

@@ -2,11 +2,11 @@
 declare(strict_types=1);
 namespace IntelGpuFirmware;
 
-const VERSION = '2026.11.24h-alpha1';
+const VERSION = '2026.11.24i-alpha2';
 const NAME = 'intel.gpu.firmware';
-const MODE = 'read_only_test';
-const WRITES_ENABLED = false;
-const WRITE_BLOCK = 'Public alpha: physical firmware writes are disabled. There is no setting to enable them.';
+const MODE = 'experimental_write';
+const WRITES_ENABLED = true;
+const WRITE_BLOCK = 'Read-only build: physical firmware writes are disabled. Install the functional alpha to use the confirmed update workflow.';
 
 final class Blocked extends \RuntimeException {}
 
@@ -20,7 +20,7 @@ final class Process implements Executor {
     public function run(array $argv, int $timeout = 45): array {
         // Fixed build boundary, not a user setting. Reject writes before spawning any process.
         if($timeout===0 || in_array('update',$argv,true) || in_array('--force',$argv,true)
-            || in_array('--allow-downgrade',$argv,true))throw new Blocked(WRITE_BLOCK);
+            || in_array('--allow-downgrade',$argv,true))throw new Blocked('The general tool runner cannot launch firmware writes. Use the confirmed update workflow.');
         return $this->execute($argv,$timeout);
     }
     public function writeGsc(string $mei,string $path): array {
@@ -489,7 +489,7 @@ final class Engine {
             throw new Blocked('The GPU firmware interface changed before the write.');
     }
     public function flash(string $planId,string $confirmation): void {
-        // Native execution additionally requires the separately built candidate release.
+        // Read-only developer builds keep this additional native write boundary.
         if($this->exec instanceof Process && !WRITES_ENABLED)throw new Blocked(WRITE_BLOCK);
         $this->assertNoUnfinishedWrite();
         $this->assertPlanUnconsumed($planId);

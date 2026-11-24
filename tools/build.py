@@ -15,11 +15,15 @@ from pathlib import Path
 root = Path(__file__).resolve().parents[1]
 release = json.loads((root / 'release.json').read_text())
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--candidate', action='store_true', help='Build a separate experimental write-enabled candidate; never installed automatically.')
+profiles=parser.add_mutually_exclusive_group()
+profiles.add_argument('--candidate', action='store_true', help='Developer candidate without an update URL; the public alpha also supports confirmed writes.')
+profiles.add_argument('--read-only', action='store_true', help='Developer inspection build with native firmware writes disabled and no update URL.')
 args = parser.parse_args()
 version = re.search(r"const VERSION = '([^']+)';", (root / "src/Core.php").read_text())[1]
 if args.candidate:
     version += '-candidate'
+if args.read_only:
+    version += '-readonly'
 buf = io.BytesIO()
 with tarfile.open(fileobj=buf, mode="w", format=tarfile.PAX_FORMAT) as tar:
     files = [root / "README.md", root / "LICENSE"]
@@ -33,9 +37,11 @@ with tarfile.open(fileobj=buf, mode="w", format=tarfile.PAX_FORMAT) as tar:
                 info.mtime = 0
                 info.mode = 0o644
                 data = p.read_bytes()
-                if args.candidate and p == root / 'src/Core.php':
-                    text = data.decode().replace("const MODE = 'read_only_test';", "const MODE = 'experimental_write';")
-                    text = text.replace('const WRITES_ENABLED = false;', 'const WRITES_ENABLED = true;')
+                if (args.candidate or args.read_only) and p == root / 'src/Core.php':
+                    text = data.decode()
+                    if args.read_only:
+                        text = text.replace("const MODE = 'experimental_write';", "const MODE = 'read_only_test';")
+                        text = text.replace('const WRITES_ENABLED = true;', 'const WRITES_ENABLED = false;')
                     text = re.sub(r"const VERSION = '[^']+';", "const VERSION = '" + version + "';", text)
                     data = text.encode()
                 info.size = len(data)
@@ -48,12 +54,17 @@ payload = bytes(payload)
 sha = hashlib.sha256(payload).hexdigest()
 plugin = ET.Element("PLUGIN", name="intel.gpu.firmware", author="Intel GPU Firmware contributors",
                     version=version, launch="Tools/IntelGpuFirmware", icon="/plugins/intel.gpu.firmware/intel-gpu-firmware.png", min="7.4.1")
-if not args.candidate:
+if not (args.candidate or args.read_only):
     assert release['channel'] == 'alpha'
     assert release['plugin_url'] == 'https://raw.githubusercontent.com/' + release['repository'] + '/alpha/intel.gpu.firmware.plg'
     plugin.set('pluginURL', release['plugin_url'])
     plugin.set('support', 'https://github.com/' + release['repository'] + '/issues')
-ET.SubElement(plugin, "CHANGES").text = """2026.11.24h-alpha1 — Public alpha, physical writes disabled
+ET.SubElement(plugin, "CHANGES").text = """2026.11.24i-alpha2 — Functional public alpha with confirmed GSC updates
+Unlike alpha 1, this release can write compatible newer GSC firmware using Intel IGSC.
+Installation and plugin updates never flash automatically. Every GPU update requires
+fresh identity/image/maintenance checks and explicit exact-device confirmation.
+No force, downgrade, arbitrary firmware upload or automatic retry. UPS remains optional.
+2026.11.24h-alpha1 — Public alpha, physical writes disabled
 Separate recoverable preflight from uncertain writes; consume failed plans.
 Restore after failed rehearsals and resume partial restoration safely.
 Re-arm guards after simulated reboot; reserve changed device mappings conservatively.
@@ -118,13 +129,13 @@ ET.SubElement(install, "INLINE").text = (
 )
 remove = ET.SubElement(plugin, "FILE", Run="/bin/bash", Method="remove")
 ET.SubElement(remove, "INLINE").text = (root / "tools/remove.sh").read_text()
-out = root / ('dist/candidate' if args.candidate else 'dist') / 'intel.gpu.firmware.plg'
+out = root / ('dist/candidate' if args.candidate else 'dist/read-only' if args.read_only else 'dist') / 'intel.gpu.firmware.plg'
 out.parent.mkdir(exist_ok=True)
 ET.indent(plugin)
 ET.ElementTree(plugin).write(out, encoding="utf-8", xml_declaration=True)
-if args.candidate:
+if args.candidate or args.read_only:
     (out.parent / 'SHA256SUMS').write_text(hashlib.sha256(out.read_bytes()).hexdigest() + '  ' + out.name + '\n')
-    print(f'Built experimental candidate {out}: {out.stat().st_size:,} bytes; payload SHA-256 {sha}')
+    print(f'Built developer profile {out}: {out.stat().st_size:,} bytes; payload SHA-256 {sha}')
     raise SystemExit(0)
 source = root / ("dist/intel-gpu-firmware-" + version + "-source.zip")
 source_files = [root / name for name in ('README.md','LICENSE','release.json','.gitignore')]

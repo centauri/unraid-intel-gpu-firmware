@@ -2,5 +2,5 @@
   "repository": "centauri/unraid-intel-gpu-firmware",
   "channel": "alpha",
   "plugin_url": "https://raw.githubusercontent.com/centauri/unraid-intel-gpu-firmware/alpha/intel.gpu.firmware.plg",
-  "physical_writes": false
+  "physical_writes": true
 }

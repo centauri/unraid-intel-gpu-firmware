@@ -1,12 +1,12 @@
-# Releasing the non-writing alpha
+# Releasing the functional alpha
 
-Repository: `centauri/unraid-intel-gpu-firmware`. Source branch: `main`. Dedicated update branch: `alpha`. Its `intel.gpu.firmware.plg` URL is fixed in `release.json`. The developer candidate has no update URL and must never be uploaded to that branch or a public alpha release.
+Repository: `centauri/unraid-intel-gpu-firmware`. Source branch: `main`. Dedicated update branch: `alpha`. Its `intel.gpu.firmware.plg` URL is fixed in `release.json`. Developer read-only/candidate profiles have no update URL and must never be uploaded to that branch or a public alpha release.
 
 1. Increment `Core.php` VERSION, changelog and current release/validation records. Unraid compares version strings lexically, so verify that the new version sorts after the existing release. Never replace a published artifact under the same version.
-2. Run the PHP suite, build/check the default package, then build/check the candidate using fake devices only. The candidate check does not install or flash.
-3. Run `python3 tools/prepare_release.py`. It verifies the compile-time write boundary, checksums, update URL and private-host exclusion. Only `release/` contents are public release assets. Do not upload the entire working directory, `dist/`, `vendor/`, host audit reports or screenshots.
+2. Run the PHP suite, build/check the default package and run `tests/artifact_check.py` against its extracted code. Build `--read-only` and run `tests/artifact_check.py --read-only` to verify the optional inspection-only boundary. All GPU execution is simulated; no test installs the plugin or runs a native writer.
+3. Run `python3 tools/prepare_release.py`. It verifies the declared functional alpha profile (`WRITES_ENABLED=true`, `experimental_write`), checksums, update URL and private-host exclusion. Only `release/` contents are public release assets. Do not upload the entire working directory, `dist/`, `vendor/`, host audit reports or screenshots.
 4. Require the GitHub validation workflow to pass. Keep a draft prerelease with the exact tested assets and version tag. Review its checksum file, release notes and source tree before making it public.
-5. Publish the prerelease. Publish only the checked default PLG and checksum to the `alpha` branch; fetch the public URL and verify identical bytes. Update checks must stay on this channel and never point to the candidate.
+5. Publish the prerelease. Publish only the checked default PLG and checksum to the `alpha` branch; fetch the public URL and verify identical bytes. Update checks must stay on this channel and never point to a developer profile.
 6. Community Applications submission is a separate step after alpha feedback; do not label this stable or universal Intel flash support.
 
 ## Reviewing a new firmware catalog

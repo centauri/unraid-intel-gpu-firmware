@@ -15,7 +15,7 @@ plg = root / "dist/intel.gpu.firmware.plg"
 xml = ET.fromstring(plg.read_bytes())
 assert xml.tag == "PLUGIN" and xml.attrib["min"] == "7.4.1"
 # Unraid uses strcmp, not semantic version comparison (.10 would sort before .9).
-assert xml.attrib["version"] > "2026.11.24g-candidate"
+assert xml.attrib["version"] > "2026.11.24h-alpha1"
 assert xml.attrib['pluginURL'] == json.loads((root/'release.json').read_text())['plugin_url']
 embedded = [f for f in xml.findall("FILE") if f.attrib.get("Type") == "base64"]
 assert len(embedded) == 1
@@ -32,7 +32,7 @@ for text in scripts:
 with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as tar:
     names = tar.getnames()
     assert "src/Core.php" in names and "web/IntelGpuFirmware.page" in names and "LICENSE" in names
-    assert b'const WRITES_ENABLED = false;' in tar.extractfile('src/Core.php').read()
+    assert b'const WRITES_ENABLED = true;' in tar.extractfile('src/Core.php').read()
     for member in tar.getmembers():
         assert member.isfile() and not member.name.startswith("/") and ".." not in Path(member.name).parts
         assert tar.extractfile(member).read() == (root / member.name).read_bytes(), member.name

@@ -12,15 +12,15 @@ One worker or installer/remover holds the operation lock. Schema-2 preflight is 
 
 Read timeouts may terminate read/download/extraction operations. Firmware writes never receive that timeout. Browser disconnection does not terminate the worker. A dead/reused worker PID is checked by command line and job ID. Status polling only reads cached files.
 
-The default build additionally blocks physical writes in the HTTP queue, production engine, Intel adapter and native process executor. Unit-test fake executors may simulate write transitions; they cannot execute commands or reach hardware.
+The default public alpha enables the confirmed GSC update path. The general process runner still rejects every update command; only the dedicated native writer is permitted. The optional `--read-only` developer build additionally blocks physical writes in the HTTP queue, production engine, Intel adapter and native process executor. Unit-test fake GPU executors simulate write transitions; they cannot execute commands or reach hardware.
 
 Native Unraid integration revealed that the security prepend validates and removes the form CSRF token. The endpoint therefore independently parses the bounded original form and verifies both its token and the payload token against the server token. No authenticated token is written to the job record or logs.
 
 UPS status is advisory, not an authorization or write prerequisite. Missing, ambiguous, unhealthy or failed monitoring cannot block or abort an update. Reporting is not proof of cabling or battery health. Targeted Docker authorization and libvirt startup hooks protect normal managed starts during maintenance. Direct host access, libvirt PCI hot-plug and concurrent root changes remain outside this boundary; OS/power failure can interrupt a write. One ASRock A380 update was verified after reboot; interrupted-write recovery remains untested.
 
-## Candidate review — 24 November 2026
+## Native writer review — 24 November 2026
 
-The optional candidate build changes only the version, mode and compile-time write flag in Core.php. There is no HTTP/config/environment switch. Its native writer constructs one exact IGSC command using a fixed executable/library path, a canonical staged fwcode path and a strictly formed MEI node. The general process runner remains unable to launch write commands or use an unlimited timeout. The engine performs full checks before reaching that dedicated entry point.
+The optional read-only build changes the version, mode and compile-time write flag in Core.php. There is no HTTP/config/environment switch to enable it. The public alpha native writer constructs one exact IGSC command using a fixed executable/library path, a canonical staged fwcode path and a strictly formed MEI node. The general process runner remains unable to launch write commands or use an unlimited timeout. The engine performs full checks before reaching that dedicated entry point.
 
 Reviewed Intel IGSC V1.3.2 at commit `06273c4defa44275c5ab93332499506b5a078760`. In `src/igsc_cli.c`, `firmware_update` logs an update failure but then overwrites `ret` with a subsequent device-version query. Therefore exit zero alone is insufficient. The plugin rejects nonempty stderr or error/failure diagnostics even at exit zero, checks the exact image/before/after version transcript and independently reads the version again. Ambiguous outcomes become `needs_attention`, not success or an automatic retry.
 
@@ -32,4 +32,4 @@ References: [Intel CLI](https://github.com/intel/igsc/blob/06273c4defa44275c5ab9
 
 ## Public alpha recovery tests
 
-Worker death is tested on both sides of the durable write boundary with real child processes and fake hardware. Authorization helper death/restart uses a real Unix socket. Boot IDs, node remapping and partial restoration are simulated; live reboot recovery of this maintenance implementation is not certified. The alpha update channel and prepared release artifacts are checked to contain WRITES_ENABLED=false. A developer candidate is never automatically installed or uploaded.
+Worker death is tested on both sides of the durable write boundary with real child processes and fake hardware. Authorization helper death/restart uses a real Unix socket. Boot IDs, node remapping and partial restoration are simulated; live reboot recovery of this maintenance implementation is not certified. The alpha update channel and prepared release artifacts are checked to contain WRITES_ENABLED=true and the mandatory confirmation/maintenance path. Tests execute the extracted public artifact with fake GPUs. The separate read-only artifact is checked for WRITES_ENABLED=false; developer artifacts are never published to the alpha channel.

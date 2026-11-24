@@ -1,13 +1,11 @@
-# Public alpha 1 — 2026.11.24h-alpha1
+# Public alpha 2 — 2026.11.24i-alpha2
 
-Intel GPU Firmware for Unraid 7.4.1 / x86_64. **Physical firmware writing is disabled; no setting enables it.**
+Intel GPU Firmware for Unraid 7.4.1 / x86_64. **This alpha can flash compatible newer GSC firmware using official Intel IGSC.** It replaces alpha 1's inspection-only public build. Installing or updating the plugin never flashes automatically.
 
-Scan Intel GPUs, read supported firmware versions, download/check the reviewed Intel GSC package, retain local version history and check Intel releases. Optional acknowledged maintenance rehearsals stop only affected workloads and test restoration. They cause temporary downtime for those workloads.
+Review the selected GPU and its workloads, prepare targeted maintenance, check compatibility again, then review and explicitly confirm the exact GPU before starting an update. After a successful write/read-back, reboot, verify the firmware and restore workloads. Equal/older firmware, wrong images, missing maintenance guards, open GPU users, expired plans and uncertain prior writes remain blocked. There is no force option, arbitrary upload or automatic retry. A UPS is recommended, not required.
 
-This alpha distinguishes detected, inspectable, image-compatible and physically tested configurations. Only one ASRock A380 has historical physical update evidence from an earlier developer build. Other boards and generations remain unvalidated.
+Detection covers Intel display controllers regardless of board vendor; actual update eligibility depends on Intel's interface, identity, project/version and hardware checks. Only GSC is written. OPROM, firmware data, board BIOS and HDMI components remain read-only. Firmware is downloaded on request from the pinned reviewed Intel package and checked against its hashes.
 
-Recovery now distinguishes a writer that was never invoked from an uncertain write. Failed rehearsals restore original policies; partial restoration is retryable. Tests cover actual worker/helper death, helper restart and simulated reboot/node renumbering. Actual reboot recovery of the new maintenance code and interrupted physical-write recovery are not certified.
+Only one ASRock A380 has historical physical update evidence from an earlier developer build. This release was tested without flashing that card again. The automated suite exercises the packaged updater, confirmation gates, actual worker/helper death, restoration and simulated reboot/device remapping with fake GPUs. A live reboot of the new boot-guard integration remains pending; interrupted physical-write recovery, other GPUs/OEMs and passthrough restoration are not certified.
 
-The public update channel remains non-writing. Developer candidate binaries are excluded from this release. Firmware images and dependency executables are downloaded from their publishers with pinned hashes, not redistributed here.
-
-Review `SHA256SUMS` before installing. Submit compatibility reports without flashing; review exported JSON before sharing. See README and docs/VALIDATION.md for scope and evidence.
+The fixed alpha plugin URL now delivers this functional updater. Versioned alpha 1 assets remain unchanged. Developer read-only/candidate packages are not release assets. Review `SHA256SUMS` and the README's update workflow before installing. Compatibility reports can be submitted without flashing; review exported JSON before sharing.

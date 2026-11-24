@@ -94,11 +94,11 @@ test('Equal and older versions never produce a plan',function(){
 test('Read-only API refuses update and unsafe flags',function(){
     [$e,$p]=setup();foreach([['fw','update'],['fw','version','--force'],['fw','version','--allow-downgrade'],['ifr','run-test']] as $a)blocks(fn()=>$e->igsc->read($a));ok(!$p->writes);
 });
-test('Native process executor refuses every write path before spawning',function(){
+test('General process executor refuses every write command before spawning',function(){
     $p=new Process();
     foreach([[['/bin/false'],0],[['/bin/false','update'],45],[['/bin/false','--force'],45],[['/bin/false','--allow-downgrade'],45]] as [$args,$timeout]) {
         try{$p->run($args,$timeout);throw new RuntimeException('Write was not blocked');}
-        catch(Blocked $e){ok(str_contains($e->getMessage(),'physical firmware writes are disabled'));}
+        catch(Blocked $e){ok(str_contains($e->getMessage(),'general tool runner cannot launch firmware writes'));}
     }
     blocks(fn()=>(new Igsc($p,'/nonexistent'))->writeGsc('/dev/mei7','/nonexistent'));
 });
@@ -373,7 +373,9 @@ test('A queued job cannot be overwritten by a second request',function(){
 });
 test('Simulated worker writes once, survives reload and verifies after reboot',function(){
     [$e,$p,$h]=setup();$plan=plan($e);$id=bin2hex(random_bytes(16));
-    $request=['action'=>'flash','args'=>['plan_id'=>$plan['id'],'confirmation'=>$plan['confirmation']]];
+    $csrf=str_repeat('c',32);
+    $request=Http::validate('POST',['action'=>'flash','csrf_token'=>$csrf,'plan_id'=>$plan['id'],
+        'confirmation'=>$plan['confirmation'],'acknowledged'=>true],$csrf);
     if(\IntelGpuFirmware\WRITES_ENABLED)$id=Http::queue($e,$request,fn()=>0);
     else $e->runtime->put('job',['id'=>$id,'state'=>'queued',...$request]);
     ok(\IntelGpuFirmware\Worker::run($e,$id)===0);ok(count($p->writes)===1);
@@ -382,6 +384,25 @@ test('Simulated worker writes once, survives reload and verifies after reboot',f
     $h->boot='00000000-0000-0000-0000-000000000002';
     $id=Http::queue($e,['action'=>'verify','args'=>[]],fn()=>0);
     ok(\IntelGpuFirmware\Worker::run($e,$id)===0);ok($e->persistent->get('flash')['state']==='complete');
+});
+test('HTTP-to-worker workflow rejects missing consent, wrong GPU, expiry and changed maintenance',function(){
+    foreach(['csrf','ack','phrase','expiry','maintenance'] as $failure) {
+        [$e,$p,$h]=setup();$plan=plan($e);$csrf=str_repeat('c',32);$launched=0;
+        $body=['action'=>'flash','csrf_token'=>$csrf,'plan_id'=>$plan['id'],'confirmation'=>$plan['confirmation'],'acknowledged'=>true];
+        if($failure==='csrf')$body['csrf_token']='invalid';
+        if($failure==='ack')unset($body['acknowledged']);
+        if($failure==='phrase')$body['confirmation']='UPDATE 0000:04:00.0';
+        if($failure==='expiry'){$plan['expires_at']=time()-1;$e->runtime->put('plan',$plan);}
+        if($failure==='maintenance')$h->ready=false;
+        $attempt=function()use($e,$body,$csrf,&$launched){
+            return Http::queue($e,Http::validate('POST',$body,$csrf),function()use(&$launched){$launched++;return 0;});
+        };
+        if($failure==='maintenance' && \IntelGpuFirmware\WRITES_ENABLED) {
+            $id=$attempt();ok(\IntelGpuFirmware\Worker::run($e,$id)===1);ok($launched===1);
+            ok(!$e->persistent->get('flash'));
+        } else {blocks($attempt);ok($launched===0);ok(!$e->persistent->get('flash'));}
+        ok(!$p->writes);
+    }
 });
 test('Worker preserves an uncertain Intel result and refuses replay',function(){
     [$e,$p]=setup();$plan=plan($e);$p->hiddenWriteError=true;$id=bin2hex(random_bytes(16));

@@ -218,11 +218,11 @@
   }
   function render() {
     const writable = state.writes_enabled === true;
-    $('igf-release').textContent = writable ? 'DEVELOPER CANDIDATE' : 'PUBLIC ALPHA · WRITES DISABLED';
+    $('igf-release').textContent = writable ? 'PUBLIC ALPHA · GSC UPDATES' : 'READ-ONLY BUILD';
     $('igf-mode').textContent = writable
-      ? 'Experimental GSC updater. One ASRock A380 update has been verified after reboot. Other hardware and interrupted-write recovery remain untested. Every update requires maintenance checks and confirmation of the exact GPU.'
-      : 'Public alpha — physical firmware writes are disabled. Scan GPUs, check compatible GSC images and record versions. Optional maintenance rehearsals stop selected workloads only after your approval. No setting enables flashing.';
-    $('igf-control').textContent = writable ? 'Explicit confirmation' : 'Public alpha testing';
+      ? 'Public alpha with confirmed GSC updates. Review GPU users, prepare maintenance and check compatibility before confirming the exact GPU. Installation and plugin updates never flash automatically. One ASRock A380 update has been verified; other hardware and interrupted-write recovery remain untested.'
+      : 'Read-only developer build — physical firmware writes are disabled. Scan GPUs, check compatible GSC images and record versions. Optional maintenance rehearsals stop selected workloads only after your approval. No setting enables flashing in this build.';
+    $('igf-control').textContent = writable ? 'Explicit confirmation' : 'Read-only testing';
     $('igf-control-detail').textContent = writable ? 'A verified image, idle GPU and your confirmation are required. A UPS is recommended, not required.' : 'Physical writes are blocked in this build, including direct API requests.';
     busy = ['queued','running'].includes(state.job?.state);
     $('igf-scan').disabled = busy; $('igf-stage').disabled = busy;

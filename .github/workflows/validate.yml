@@ -19,10 +19,11 @@ jobs:
         run: |
           python3 tools/build.py
           python3 tests/package_check.py
-      - name: Validate developer candidate without installing or flashing
+          python3 tests/artifact_check.py
+      - name: Validate optional read-only build without installing or flashing
         run: |
-          python3 tools/build.py --candidate
-          python3 tests/candidate_check.py
+          python3 tools/build.py --read-only
+          python3 tests/artifact_check.py --read-only
       - name: Prepare explicit public artifacts only
         run: python3 tools/prepare_release.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
